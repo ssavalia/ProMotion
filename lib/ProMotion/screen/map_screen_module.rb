@@ -16,7 +16,8 @@ module ProMotion
       self.mapview ||= add MKMapView.new, {
         frame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height),
         resize: [ :width, :height ],
-        delegate: self
+        delegate: self,
+        showsUserLocation: true
       }
     end
 
