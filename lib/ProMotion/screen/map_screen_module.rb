@@ -103,7 +103,7 @@ module ProMotion
         
         if button_action = annotation.annotation_params[:button_with_action]
           button = UIButton.buttonWithType(UIButtonTypeDetailDisclosure)
-          button.addTarget(self, action: :"self.#{button_action}:", forControlEvents:UIControlEventTouchUpInside)
+          button.addTarget(self, action: :"#{button_action}:", forControlEvents:UIControlEventTouchUpInside)
           view.rightCalloutAccessoryView = button
         end
       end
