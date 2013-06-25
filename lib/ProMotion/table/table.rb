@@ -131,6 +131,11 @@ module ProMotion
       trigger_action(cell[:action], cell[:arguments]) if cell[:action]
     end
 
+    def tableView(tableView, canEditRowAtIndexPath:index_path)
+      cell = @promotion_table_data.cell(index_path: index_path)
+      cell[:editable].nil? ? true : cell[:editable]
+    end
+
     def tableView(tableView, commitEditingStyle:editing_style, forRowAtIndexPath:index_path)
       if editing_style == UITableViewCellEditingStyleDelete
         delete_cell(index_path)
