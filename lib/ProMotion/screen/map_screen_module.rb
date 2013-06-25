@@ -91,6 +91,7 @@ module ProMotion
     end
 
     def mapView(mapView, viewForAnnotation:annotation)
+      return nil if annotation.class == MKUserLocation
       identifier = annotation.annotation_params[:identifier]
       if view = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
         view.annotation = annotation
@@ -100,10 +101,10 @@ module ProMotion
         view.canShowCallout = annotation.annotation_params[:show_callout]
         view.animatesDrop = annotation.annotation_params[:animates_drop]
         view.pinColor = annotation.annotation_params[:pin_color]
-        
+
         if button_action = annotation.annotation_params[:button_with_action]
           button = UIButton.buttonWithType(UIButtonTypeDetailDisclosure)
-          button.addTarget(self, action: :"#{button_action}:", forControlEvents:UIControlEventTouchUpInside)
+          button.addTarget(self, action: "#{button_action}:", forControlEvents:UIControlEventTouchUpInside)
           view.rightCalloutAccessoryView = button
         end
       end
