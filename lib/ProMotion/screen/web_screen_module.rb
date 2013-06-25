@@ -17,6 +17,8 @@ module ProMotion
         delegate: self
       }
 
+      self.webview.scalesPageToFit = true
+
       set_initial_content
     end
 
