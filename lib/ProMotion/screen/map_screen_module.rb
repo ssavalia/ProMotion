@@ -101,20 +101,25 @@ module ProMotion
         view.canShowCallout = annotation.annotation_params[:show_callout]
         view.animatesDrop = annotation.annotation_params[:animates_drop]
         view.pinColor = annotation.annotation_params[:pin_color]
-
-        if button_action = annotation.annotation_params[:button_with_action]
-          button = UIButton.buttonWithType(UIButtonTypeDetailDisclosure)
-          button.addTarget(self, action: "#{button_action}:", forControlEvents:UIControlEventTouchUpInside)
-          view.rightCalloutAccessoryView = button
-        end
+        view.rightCalloutAccessoryView = create_button(annotation.annotation_params[:button]) if annotation.annotation_params[:button]
       end
       view
     end
 
+    def create_button(opts={})
+      button = UIButton.buttonWithType(UIButtonTypeDetailDisclosure)
+
+      button.setTitle(opts[:title], forState:UIControlStateNormal) if opts[:title]
+      button.tag = opts[:tag]  if opts[:tag]
+      button.addTarget(self, action: "#{opts[:action]}:", forControlEvents:UIControlEventTouchUpInside)
+
+      button
+    end
+
     def set_start_position(params={})
-      params[:latitude] ||= 37.331789
+      params[:latitude]  ||= 37.331789
       params[:longitude] ||= -122.029620
-      params[:radius] ||= 10
+      params[:radius]    ||= 10
 
       meters_per_mile = 1609.344
 
