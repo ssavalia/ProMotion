@@ -15,7 +15,10 @@ module ProMotion
 
     def set_up_table_view
       self.view = self.create_table_view_from_data(self.table_data)
+
+      set_custom_separator
     end
+
 
     def set_up_searchable
       if self.class.respond_to?(:get_searchable) && self.class.get_searchable
@@ -30,6 +33,12 @@ module ProMotion
         else
           PM.logger.warn "To use the refresh control on < iOS 6, you need to include the CocoaPod 'CKRefreshControl'."
         end
+      end
+    end
+
+    def set_custom_separator
+      if self.class.respond_to?(:get_separator_style) && self.class.get_separator_style
+        table_view.separatorStyle = self.class.get_separator_style_param
       end
     end
 

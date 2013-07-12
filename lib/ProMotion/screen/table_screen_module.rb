@@ -38,6 +38,20 @@ module ProMotion
         @refreshable_params ||= nil
       end
 
+      # Separator Style
+      def set_separator_style(style)
+        @separator_style_param  = style
+        @custom_separator_style = true
+      end
+
+      def get_separator_style
+        @custom_separator_style ||= false
+      end
+
+      def get_separator_style_param
+        @separator_style_param ||= nil
+      end
+
     end
     def self.included(base)
       base.extend(ClassMethods)

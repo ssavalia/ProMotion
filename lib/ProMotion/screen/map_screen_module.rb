@@ -98,6 +98,7 @@ module ProMotion
       else
         #Set the pin properties
         view = MKPinAnnotationView.alloc.initWithAnnotation(annotation, reuseIdentifier:identifier)
+        view.enabled = annotation.annotation_params[:enabled] if annotation.annotation_params[:enabled]
         view.canShowCallout = annotation.annotation_params[:show_callout]
         view.animatesDrop = annotation.annotation_params[:animates_drop]
         view.pinColor = annotation.annotation_params[:pin_color]
